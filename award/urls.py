@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     path('',views.home,name = 'index'),
+    path('profile/<str:username>/',views.profile,name='profile'),
+    path('edit/profile/',views.update_profile,name='update'),
 
 ]
 if settings.DEBUG:
