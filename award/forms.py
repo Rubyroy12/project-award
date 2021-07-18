@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Project
 from django.contrib.auth.models import User
 
 class ProfileForm(forms.ModelForm):
@@ -18,3 +18,7 @@ class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['name', 'photo', 'bio']
+        
+    class Meta:
+        model = Project
+        fields = ('title','landingpage','description','link')

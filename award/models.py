@@ -44,3 +44,10 @@ class Profile(models.Model):
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
 
+class Project(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    title = models.CharField(blank=True, max_length=120)
+    landingpage = CloudinaryField('image')
+    description = models.CharField(max_length=300)
+    link= models.CharField(max_length=100)
+    
