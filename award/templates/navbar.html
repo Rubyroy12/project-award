@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Project Award</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,33 +11,35 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">About</a>
       </li>
+
+
       {% if user.is_authenticated %}
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="{% url 'profile' user.username %}" style="color: inherit;">
-            </span>Profile</a>
-        </li>
-        <li>
-          <a href="{%url 'index'%}" style="color: inherit;">Home</a>
-        </li>
-        <li>
-          <a href="/accounts/password_change" style="color: inherit;">Change Password</a>
-        </li>
+    
+          <ul class="dropdown-menu" role="menu">
+              <li>
+                  <a href="{% url 'profile' user.username %}">Profile</a>
+              </li>
+              <li>
+                  <a href="{%url 'index'%}" style="color: inherit;">Home</a>
+              </li>
+              <li>
+                  <a href="/accounts/password_change" style="color: inherit;">Change Password</a>
+              </li>
+              
+              <li>
+                  <a href="/accounts/logout" style="color: inherit;">Logout</a>
+              </li>
+          </ul>
+      </div>
 
-        <li>
-          <a href="/accounts/logout" style="color: inherit;">Logout</a>
-        </li>
-      </ul>
+      {% else %}
+      <a class='btn btn-default' href="/accounts/login">
+          <p>Login</p>
+      </a>
+      {% endif %}
   </div>
-
-  {% else %}
-  <a class='btn btn-default' href="/accounts/login">
-    <p>Login</p>
-  </a>
-  {% endif %}
-
   </ul>
   <form class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
