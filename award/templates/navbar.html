@@ -13,32 +13,41 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
+      <div class="col-sm-6 col-md-6" style="display: inline-flex; margin-right: 50px;">
+        {% if user.is_authenticated %}
+     
+          <button class="btn btn-primary"> Project</button>
+        </a>
 
+        <div class="instaicon like" style="display: inline;" class="dropdown">
+            <a href="{% url 'profile' user.username %}" class="dropdown-toggle btn btn-default"
+                data-toggle="dropdown" role="button" aria-expanded="false"></a>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="{% url 'profile' user.username %}" style="color: inherit;">
+                        </span>Profile</a>
+                </li>
+                <li>
+                    <a href="{%url 'index'%}" style="color: inherit;">Home</a>
+                </li>
+                <li>
+                    <a href="/accounts/password_change" style="color: inherit;">Change Password</a>
+                </li>
+                
+                <li>
+                    <a href="/accounts/logout" style="color: inherit;">Logout</a>
+                </li>
+            </ul>
+        </div>
 
-      {% if user.is_authenticated %}
+        {% else %}
+        <a class='btn btn-default' href="/accounts/login">
+            <p>Login</p>
+        </a>
+        {% endif %}
+    </div>
     
-          <ul class="dropdown-menu" role="menu">
-              <li>
-                  <a href="{% url 'profile' user.username %}">Profile</a>
-              </li>
-              <li>
-                  <a href="{%url 'index'%}" style="color: inherit;">Home</a>
-              </li>
-              <li>
-                  <a href="/accounts/password_change" style="color: inherit;">Change Password</a>
-              </li>
-              
-              <li>
-                  <a href="/accounts/logout" style="color: inherit;">Logout</a>
-              </li>
-          </ul>
-      </div>
 
-      {% else %}
-      <a class='btn btn-default' href="/accounts/login">
-          <p>Login</p>
-      </a>
-      {% endif %}
   </div>
   </ul>
   <form class="form-inline my-2 my-lg-0">
