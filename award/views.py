@@ -42,3 +42,8 @@ def update_profile(request):
     else:
         form = UploadForm()
     return render(request,'edit_profile.html',{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def submit(request):
+    return render(request,'submit.html')
+    
