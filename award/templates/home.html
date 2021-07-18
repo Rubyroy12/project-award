@@ -6,8 +6,25 @@
 
 <div class="container-fluid">
     <h2>Project award</h2>
+    <div class="container">
+        <div class="row">
+            {%for project in projects%}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{project.landingpage.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">{{ project.description }}</p>
+                </div>
+                <a class="btn btn-primary" href="{{project.link}}">View Website</a>
+              </div>
+              {%endfor%}
+        
+    
+        </div>
 
+    </div>
+   
 
+    
     
 
 </div>

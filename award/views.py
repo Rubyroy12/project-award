@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
-from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm
+from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm
+from .models import Project
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    projects = Project.objects.all()
+    return render(request, 'home.html',{"projects":projects})
 
 @login_required(login_url='/accounts/login/')
 def profile(request, username):
@@ -40,10 +42,22 @@ def update_profile(request):
             post.save()
             return redirect('profile')
     else:
-        form = UploadForm()
+        form = ProjectForm()
     return render(request,'edit_profile.html',{"form":form})
 
 @login_required(login_url='/accounts/login/')
 def submit(request):
-    return render(request,'submit.html')
+    if request.method == 'POST':
+        form = ProjectForm(request.POST,request.FILES)
+        print(form.errors)
+        if form.is_valid():
+            submit = form.save(commit=False)
+            submit.user = request.user.profile
+            submit.save()
+            return redirect('home')
+    else:
+        form = ProjectForm()
+    return render(request,'submit.html', {"form":form})
+
     
+

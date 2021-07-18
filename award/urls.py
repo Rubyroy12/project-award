@@ -8,7 +8,7 @@ urlpatterns=[
     path('',views.home,name = 'index'),
     path('profile/<str:username>/',views.profile,name='profile'),
     path('edit/profile/',views.update_profile,name='update'),
-    path('submitproject/', views.submit,name='submit'),
+    path('^submitproject/$', views.submit,name='submit'),
 
 ]
 if settings.DEBUG:
