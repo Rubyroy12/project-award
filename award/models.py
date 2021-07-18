@@ -50,6 +50,7 @@ class Project(models.Model):
     landingpage = CloudinaryField('image')
     description = models.CharField(max_length=300)
     link= models.CharField(max_length=100)
+    posted = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         ordering = ["-pk"]

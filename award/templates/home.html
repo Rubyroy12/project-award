@@ -10,7 +10,7 @@
         <div class="row">
             {%for project in projects%}
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{project.landingpage.url}}" alt="Card image cap">
+             <a href="{% url 'project' project.id %}"> <img class="card-img-top" src="{{ project.landingpage.url}}" alt="Card image cap"></a> 
                 <div class="card-body">
                   <p class="card-text">{{ project.description }}</p>
                 </div>
