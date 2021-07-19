@@ -155,3 +155,8 @@ cloudinary.config(
   api_key = "828966265885485", 
   api_secret = "-9DtdpiedUWrxsRAaCISKXrmmfE" 
 )
+
+STAR_RATINGS_RANGE=10
+
+STAR_RATINGS_STAR_HEIGHT = 20 
+STAR_RATINGS_STAR_WIDTH= 20

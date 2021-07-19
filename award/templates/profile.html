@@ -1,0 +1,44 @@
+{% extends  'base.html' %}
+{% load bootstrap4  %}
+
+
+{%block content %}
+<div class="col-md-7" style="margin-top:10px">
+    <div class="media-body">
+
+
+        <img class="rounded-circle" style=" height: 165px; width: 165px;" src="{{ user.profile.photo.url }}" alt=""
+            style="float : left;">
+
+        <div class="details" style="float:right;">
+            <div class="profile d-flex justify-content-around">
+                <h5 style="margin-right: 20px; margin-left: 20px;">{{ user.username}}</h5>
+
+                <a class="btn btn-sm btn-outline-primary mr-3" data-toggle="modal"
+                    data-target=".bd-example-modal-md"><strong>Edit
+                        Profile</strong></a>
+            </div>
+
+          
+            <p style="margin-left: 20px;">{{ user.profile.bio}}</p>
+        </div>
+
+
+    </div>
+    <div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md ">
+            <div class="modal-content">
+                <form action="" method="post" novalidate enctype="multipart/form-data" class="mr-4 mt-4 ml-4 mb-4">
+                    {% csrf_token%}
+                    {% bootstrap_form user_form layout='inline' %}
+                    {% bootstrap_form prof_form layout='inline' %}
+                    <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock %}

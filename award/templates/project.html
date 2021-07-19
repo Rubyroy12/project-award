@@ -1,4 +1,5 @@
 {% extends  'base.html' %}
+{% load ratings %}
 
 
 {%load bootstrap4%}
@@ -7,49 +8,39 @@
 
 
 {%block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
 
-
-        <div class="col-md-8">
-            <img src="{{ project.landingpage.url }}" alt="" width="100%" height="500px">
+<div class="col-md-2"></div>
+        <div class="col-md-8" style="margin-top:30px">
+            <img src="{{ project.landingpage.url }}" alt="" width="80%" height="500px">
             <hr>
             <p>{{ project.description }}</p>
             <a href="{{ project.link }}" target="_blank" class="btn btn-outline-primary">View webiste</a>
 
             <p>Rate Project</p>
-            <form class="form" action="" method="post" novalidate enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-7 d-flex justify-content-between align-items-center">
-                        {% bootstrap_form form layout='block' %}
-                        <br>
-                        <button type="submit" class="btn btn-sm btn-info"
-                            style="margin-top:10px; margin-left:5px">Update</button>
-                    </div>
-                    <div class="col-md-2"></div>
-
-                </div>
-            </form>
-
-        </div>
-        <div class="col-md-4">
-            <p>--Reviews--</p>
-            {% for rates in rates%}
-            <div class="btn btn-outline-success">Design: {{project.rates.design}}</div>
-            <div class="btn btn-outline-success">Usability: {{project.rates.usability}}</div>
-            <div class="btn btn-outline-success">Content: {{project.rates.content}}</div>
-                {%endfor%}
 
             <hr>
-          
-          
+            <div class="mt-2">
+                <div class="row">
+                  <div class="col-md-3">
+                    <h6>Design Rating</h6>
+                    {% ratings project %}
+                  </div>
+                  <div class="col-md-3">
+                    <h6>Usability Rating</h6>
+                    {% ratings project %}
+                  </div>
+                  <div class="col-md-3">
+                    <h6>Content Rating</h6>
+                    {% ratings project %}
+                  </div>
+                </div>
+                <hr>
 
-
-
-
-
+        </div>
+        <div class="col-md-2">
+         
         </div>
 
 
