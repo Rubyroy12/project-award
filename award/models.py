@@ -61,8 +61,9 @@ class Project(models.Model):
         self.delete()
     
     @classmethod
-    def search_profile(cls, title):
-        return cls.objects.filter(title__icontains=title).all()
+    def search_project(cls, search_term):
+        projects= cls.objects.filter(title__icontains=search_term)
+        return projects
     
     def __str__(self):
         return self.title

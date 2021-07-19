@@ -101,10 +101,10 @@ def comment(request, id):
 @login_required(login_url='/accounts/login/')
 def search_project(request):
     if 'search_project' in request.GET and request.GET['search_project']:
-        title = request.GET.get("search_user")
-        results = Project.search_project(title)
+        search_term = request.GET.get("search_project")
+        results = Project.search_project(search_term)
         print(results)
-        message = f'title'
+        message = f'search_term'
         params = {
             'results': results,
             'message': message
