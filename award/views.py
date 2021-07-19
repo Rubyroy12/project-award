@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
-from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm
-from .models import Project
+from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm,RatingForm
+from .models import Project,Rating
 
 # Create your views here.
 
@@ -36,7 +36,6 @@ def profile(request, username):
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST,request.FILES)
-        print(form.errors)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
@@ -62,4 +61,14 @@ def submit(request):
     
 def project(request,id):
     project = Project.objects.get(id=id)
-    return render(request,'project.html',{"project":project})
+    if request.method == 'POST':
+        form= RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = RatingForm()
+        rates=Rating.objects.all()
+  
+    return render(request,'project.html',{"project":project, "form":form,"rates":rates})

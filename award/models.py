@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 from cloudinary.models import CloudinaryField 
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -62,3 +62,19 @@ class Project(models.Model):
     
     def __str__(self):
         return self.title
+
+class Rating(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rates')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rates')
+    design= models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    usability = models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    content = models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
+
+    def save_rating(self):
+        self.save()
+  
+    def __str__(self):
+        return self.design
+
+
+

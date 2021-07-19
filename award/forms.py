@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile,Project
+from .models import Profile,Project,Rating
 from django.contrib.auth.models import User
 
 class ProfileForm(forms.ModelForm):
@@ -23,3 +23,8 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ('title','landingpage','description','link')
+    
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ('design','usability','content')

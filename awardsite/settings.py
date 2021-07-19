@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'awardsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projects',
+        'NAME': 'awards',
         'USER': 'ibrahim',
         'PASSWORD': 'secret',
         'HOST': '127.0.0.1',
