@@ -1,8 +1,10 @@
 {% extends  'base.html' %}
 
+
 {%load bootstrap4%}
 
 {% load static %}
+
 
 {%block content %}
 <div class="container">
@@ -34,13 +36,15 @@
         </div>
         <div class="col-md-4">
             <p>--Reviews--</p>
-            <div class="btn btn-outline-success">{{project.rates.design}}</div>
-            <div class="btn btn-outline-success">{{rates.usability}}</div>
-            <div class="btn btn-outline-success">{{rates.content}}</div>
-
+            {% for rates in rates%}
+            <div class="btn btn-outline-success">Design: {{project.rates.design}}</div>
+            <div class="btn btn-outline-success">Usability: {{project.rates.usability}}</div>
+            <div class="btn btn-outline-success">Content: {{project.rates.content}}</div>
+                {%endfor%}
 
             <hr>
-            <p>Comments</p>
+          
+          
 
 
 

@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
-from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm,RatingForm
+from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm,RatingForm, CommentForm
 from .models import Project,Rating
+from django.shortcuts import render,redirect, get_object_or_404
+
+
 
 # Create your views here.
 
@@ -53,7 +56,7 @@ def submit(request):
             submit = form.save(commit=False)
             submit.user = request.user.profile
             submit.save()
-            return redirect('home')
+        return redirect('/')
     else:
         form = ProjectForm()
     return render(request,'submit.html', {"form":form})
@@ -72,3 +75,25 @@ def project(request,id):
         rates=Rating.objects.all()
   
     return render(request,'project.html',{"project":project, "form":form,"rates":rates})
+
+
+# @login_required(login_url='/accounts/login/')
+# def comment(request, id):
+#     image = get_object_or_404(Project, pk=id)
+#     comments = image.comment.all()
+#     if request.method == 'POST':
+#         commentform = CommentForm(request.POST)
+#         if commentform.is_valid():
+#             comment = commentform.save(commit=False)
+#             comment.photo = image
+#             comment.user = request.user.profile
+#             comment.save()
+#             return HttpResponseRedirect(request.path_info)
+#     else:
+#         commentform = CommentForm()
+#     params = {
+#         'project': project,
+#         'form': commentform,
+#         'comments':comments,
+#     }
+#     return render(request, 'project.html', params)

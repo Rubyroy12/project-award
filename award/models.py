@@ -64,17 +64,32 @@ class Project(models.Model):
         return self.title
 
 class Rating(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rates')
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rates')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rates', null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rates', null=True)
     design= models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
     usability = models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
     content = models.PositiveIntegerField( null=True, validators=[MinValueValidator(1), MaxValueValidator(10)])
 
     def save_rating(self):
         self.save()
+    
+    def get_ratings(self, queryset=None):
+        rates = Rating.objects.filter(pk=self.kwargs['project.id']).first()
+        return rates
   
+    # def __str__(self):
+    #     return self.design
+
+class Comment(models.Model):
+    comment = models.TextField()
+    user = models.ForeignKey('Profile',on_delete=models.CASCADE,related_name='comment')
+    project = models.ForeignKey('Project',on_delete=models.CASCADE,related_name='comment')
+
+    class Meta:
+        ordering = ["-pk"]
+
     def __str__(self):
-        return self.design
+        return f'{self.user.name} Image'
 
 
 
