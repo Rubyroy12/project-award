@@ -5,27 +5,34 @@
 {% block content %}
 
 <div class="container-fluid">
-    <h2>Project award</h2>
-    <div class="container">
-        <div class="row">
-            {%for project in projects%}
-            <div class="card" style="width: 18rem;">
-             <a href="{% url 'project' project.id %}"> <img class="card-img-top" src="{{ project.landingpage.url}}" alt="Card image cap"></a> 
-                <div class="card-body">
-                  <p class="card-text">{{ project.description }}</p>
-                </div>
-                <a class="btn btn-primary" href="#">View Website</a>
-              </div>
-              {%  endfor %}
-        
-    
+  <h2>Project award</h2>
+  <div class="container">
+    <div class="row d-flex">
+      {%for project in projects%}
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;" style="margin-top: 20px;">
+          <a href="{% url 'project' project.id %}"> <img class="card-img-top" src="{{ project.landingpage.url}}"
+              alt="Card image cap" height="200px"></a>
+          <div class="card-body">
+            <p class="card-text">{{ project.posted | timesince }} <em>By: </em> <strong>{{ project.user.user.username }}</strong></p>
+          </div>
+          <a class="btn btn-primary" href="{% url 'project' project.id %}">View Details</a>
         </div>
+        
+
+      </div>
+      
+      {%  endfor %}
+     
+
 
     </div>
-   
 
-    
-    
+  </div>
+
+
+
+
 
 </div>
 

@@ -76,8 +76,7 @@ class Rating(models.Model):
     def get_ratings(self, queryset=None):
         rates = Rating.objects.filter(pk=self.kwargs['project.id']).first()
         return rates
-  
-  
+
 
 class Comment(models.Model):
     comment = models.TextField()
@@ -88,7 +87,7 @@ class Comment(models.Model):
         ordering = ["-pk"]
 
     def __str__(self):
-        return f'{self.user.name} Image'
+        return f'{self.user.name} Project'
 
 
 
