@@ -1,0 +1,40 @@
+{% extends  'base.html' %}
+{% load bootstrap4  %}
+
+{%block content%}
+<div class="container-fluid">
+    <div class="row">
+        {%if projects %}
+        <h2>Found {{ projects |length }} of searched term {{message}}</h2>
+
+        {%else %}
+        <div>
+            <h2 class="text-center"> Found 0 projects for the search term {{message}}</h2>
+        </div>
+
+     
+        {% endif %}
+
+    </div>
+
+    <div class="container-fluid row">
+
+        {% if projects %}
+        {% for project in project %}
+        <div class="col-md-7">
+            <h1 class="text-underline">{{project.title}}</h1>
+            
+            <img src="{{image.photo.url}}" alt="" height="300px" width="300px">
+            <p class="text-justify">{{project.description}}</p>
+
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% endif %}
+
+    
+</div>
+
+{%endblock%}

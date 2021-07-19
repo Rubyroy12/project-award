@@ -60,6 +60,10 @@ class Project(models.Model):
     def delete_project(self):
         self.delete()
     
+    @classmethod
+    def search_profile(cls, title):
+        return cls.objects.filter(title__icontains=title).all()
+    
     def __str__(self):
         return self.title
 

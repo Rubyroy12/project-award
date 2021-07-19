@@ -11,6 +11,7 @@ urlpatterns=[
     path('^submitproject/$', views.submit,name='submit'),
     path('project/<id>/', views.project,name='project'),
     path(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('search/', views.search_project, name='search'),
 
 ]
 if settings.DEBUG:

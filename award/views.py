@@ -97,3 +97,19 @@ def comment(request, id):
         'comments':comments,
     }
     return render(request, 'post.html', params)
+
+@login_required(login_url='/accounts/login/')
+def search_project(request):
+    if 'search_project' in request.GET and request.GET['search_project']:
+        title = request.GET.get("search_user")
+        results = Project.search_project(title)
+        print(results)
+        message = f'title'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'results.html', params)
+    else:
+        message = "You did not make a selection"
+    return render(request, 'results.html', {'message': message})
