@@ -45,7 +45,7 @@ class Profile(models.Model):
         return cls.objects.filter(user__username__icontains=name).all()
 
 class Project(models.Model):
-    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE,related_name='projects')
     title = models.CharField(blank=True, max_length=120)
     landingpage = CloudinaryField('image')
     description = models.CharField(max_length=300)
@@ -77,8 +77,7 @@ class Rating(models.Model):
         rates = Rating.objects.filter(pk=self.kwargs['project.id']).first()
         return rates
   
-    # def __str__(self):
-    #     return self.design
+  
 
 class Comment(models.Model):
     comment = models.TextField()

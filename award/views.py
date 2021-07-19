@@ -15,7 +15,8 @@ def home(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request, username):
-   
+    projects = request.user.profile.projects.all()
+    
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -29,7 +30,7 @@ def profile(request, username):
     params = {
         'user_form': user_form,
         'prof_form': prof_form,
-        # 'images': images,
+        'projects': projects,
     }
     return render(request, 'profile.html', params)
 
