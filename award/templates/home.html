@@ -14,6 +14,7 @@
           <a href="{% url 'project' project.id %}"> <img class="card-img-top" src="{{ project.landingpage.url}}"
               alt="Card image cap" height="200px"></a>
           <div class="card-body">
+            <img src="{{}}" alt="">
             <p class="card-text">{{ project.posted | timesince }} <em>By: </em> <strong>{{ project.user.user.username }}</strong></p>
           </div>
           <a class="btn btn-primary" href="{% url 'project' project.id %}">View Details</a>
