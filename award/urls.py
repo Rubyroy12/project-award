@@ -12,6 +12,8 @@ urlpatterns=[
     path('project/<id>/', views.project,name='project'),
     path(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     path('search/', views.search_project, name='search'),
+    path('^api/merch/$',views.MerchList.as_view())
+
 
 ]
 if settings.DEBUG:

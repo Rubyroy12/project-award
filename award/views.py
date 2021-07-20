@@ -4,6 +4,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm,RatingForm, CommentForm
 from .models import Project,Rating
 from django.shortcuts import render,redirect, get_object_or_404
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import MerchSerializer
 
 
 
@@ -61,7 +64,7 @@ def submit(request):
         form = ProjectForm()
     return render(request,'submit.html', {"form":form})
 
-    
+@login_required(login_url='/accounts/login/')
 def project(request,id):
     project = Project.objects.get(id=id)
     if request.method == 'POST':
@@ -113,3 +116,8 @@ def search_project(request):
     else:
         message = "You did not make a selection"
     return render(request, 'results.html', {'message': message})
+class MerchList(APIView):
+    def get(self, request,format=None):
+        all_merch = Project.objects.all()
+        serializers= MerchSerializer(all_merch,many=True)
+        return Response(serializers.data)
