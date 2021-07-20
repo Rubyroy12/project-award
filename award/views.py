@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
 from .forms import ProfileForm,UpdateUserForm,UpdateUserProfileForm,ProjectForm,RatingForm, CommentForm
-from .models import Project,Rating
+from .models import Project,Rating,Profile,ProfileMerch,ProjectMerch
 from django.shortcuts import render,redirect, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -116,8 +116,16 @@ def search_project(request):
     else:
         message = "You did not make a selection"
     return render(request, 'results.html', {'message': message})
-class MerchList(APIView):
+
+    
+class MerchProfileList(APIView):
     def get(self, request,format=None):
-        all_merch = Project.objects.all()
+        all_merch = ProfileMerch.objects.all()
+        serializers= MerchSerializer(all_merch,many=True)
+        return Response(serializers.data)
+
+class MerchProjectList(APIView):
+    def get(self, request,format=None):
+        all_merch = ProjectMerch.objects.all()
         serializers= MerchSerializer(all_merch,many=True)
         return Response(serializers.data)

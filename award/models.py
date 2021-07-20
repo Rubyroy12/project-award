@@ -96,3 +96,16 @@ class Comment(models.Model):
 
 
 
+class ProfileMerch(models.Model):
+ 
+    photo = CloudinaryField('image')
+    bio = models.CharField(max_length=300)
+    name = models.CharField(blank=True, max_length=120)
+
+class ProjectMerch(models.Model):
+   
+    title = models.CharField(blank=True, max_length=120)
+    landingpage = CloudinaryField('image')
+    description = models.CharField(max_length=300)
+    link= models.CharField(max_length=100)
+    posted = models.DateTimeField(auto_now_add=True)
