@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
 
-import cloudinary
+import os
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
+import cloudinary
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +37,7 @@ if config('MODE')=="dev":
            'USER': config('DB_USER'),
            'PASSWORD': config('DB_PASSWORD'),
            'HOST': config('DB_HOST'),
-           'PORT': '',
+           'PORT': ''
        }
        
    }
@@ -54,9 +55,7 @@ DATABASES['default'].update(db_from_env)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
